@@ -30,6 +30,7 @@ int main(int argc, char **argv) {
 
     // Set configuration parameters
     InitParameters init_params;
+	init_params.svo_input_filename.set(argv[1]);
     init_params.camera_resolution = RESOLUTION_HD720; // Use HD720 video mode (default fps: 60)
     init_params.coordinate_system = COORDINATE_SYSTEM_RIGHT_HANDED_Y_UP; // Use a right-handed Y-up coordinate system
     init_params.coordinate_units = UNIT_METER; // Set units in meters

@@ -55,12 +55,12 @@ int main(int argc, char **argv) {
     }
 
     cv::Size size(zed.getResolution().width, zed.getResolution().height);
-    cv::Size size_sbs(size.width * 2, size.height);
+    cv::Size size_sbs(size.width, size.height);
 
     // Define OpenCV window size
-    int width = 720;
-    int height = 404;
-    Mat svo_image(width * 2, height, MAT_TYPE_8U_C4, MEM_CPU);
+    int width = size_sbs.width;
+    int height = size_sbs.height;
+    Mat svo_image(width, height, MAT_TYPE_32F_C4, MEM_CPU);
     cv::Mat svo_image_ocv = slMat2cvMat(svo_image);
 
     // Setup key, images, times
@@ -78,7 +78,8 @@ int main(int argc, char **argv) {
         if (zed.grab() == SUCCESS) {
 
             // Get the side by side image
-            zed.retrieveImage(svo_image, VIEW_SIDE_BY_SIDE, MEM_CPU, width, height);
+            zed.retrieveMeasure(svo_image, MEASURE_XYZRGBA, MEM_CPU, width, height);
+			//zed.retrieveMeasure(svo_image, MEASURE_XYZRGBA, MEM_CPU, width, height);
 
             // Display the frame
             cv::imshow("View", svo_image_ocv);

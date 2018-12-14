@@ -2,6 +2,13 @@ SET(execName ZED_Positional_Tracking)
 cmake_minimum_required(VERSION 2.4)
 PROJECT(${execName})
 
+IF (WIN32)
+	MESSAGE(STATUS "Now is windows")
+	SET(OpenCV_DIR "D:\CV\opencv-3.4.1\build\x64\vc15\lib")
+ELSEIF (UNIX)
+	MESSAGE(STATUS "Now is UNIX-like OS's.")
+ENDIF ()
+
 if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 OLD)
 	cmake_policy(SET CMP0015 OLD)
